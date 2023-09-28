@@ -12,7 +12,7 @@ def get_estimated_price(location,sqft,bhk,bath):
     except:
         loc_index = -1 
         
-    x = np.zeros(len(x.columns))
+    x = np.zeros(len(__data_columns))
 
     x[0] = sqft
     x[1] = bath
@@ -20,26 +20,33 @@ def get_estimated_price(location,sqft,bhk,bath):
     if loc_index>=0:
          x[loc_index]=1
     
-    return __model.predict([x])
+    return( round(__model.predict([x])[0],2))
 
-def get_location_names():
-    return __locations
 
 def load_artifacts():
     print("loading saved artifacts....start")
     global __data_columns
     global __locations
     
-    with open("Server/artifacts/columns.json",'r') as f:
+    with open("/Users/omkarvyas/Documents/Personel_github/HousePricePredictionModel/Server/artifacts/columns.json",'r') as f:
         __data_columns = json.load(f)['data_columns']
         __locations = __data_columns[3:]
     
     global __model
-    with open("Server/artifacts/Banglore_house_price_prediction_model.pickle",'rb') as f:
-        __model = pickle.load(f)
-    print("loading saved artifacts....done")    
+   
+    if __model is None:
+        with open('/Users/omkarvyas/Documents/Personel_github/HousePricePredictionModel/Server/artifacts/Banglore_house_price_prediction_model.pickle', 'rb') as f:
+            __model = pickle.load(f)
+    print("loading saved artifacts...done")
+
+def get_location_names():
+    return __locations
+
+def get_data_columns():
+    return __data_columns
 
 
 if __name__ == '__main__':
     load_artifacts()
-    print(get_location_names())   
+    print(get_location_names()) 
+    print(get_estimated_price('1st Phase JP Nagar',1000, 3, 3))  
