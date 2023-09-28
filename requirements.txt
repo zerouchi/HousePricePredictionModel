@@ -1,6 +1,6 @@
 flask
 scikit-learn
-flask_cors
+flask-cors
 pickleshare
 numpy
 pandas
