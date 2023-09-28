@@ -1,10 +1,9 @@
 flask
 scikit-learn
 flask_cors
-pickle
+pickleshare
 json
 numpy
 pandas
 numpy
-seaborn
-matplotlib
+
