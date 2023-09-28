@@ -2,7 +2,6 @@ flask
 scikit-learn
 flask_cors
 pickleshare
-json
 numpy
 pandas
 numpy
